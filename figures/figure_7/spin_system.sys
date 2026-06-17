@@ -1,0 +1,16 @@
+NSpins (0) : 4 - Number of Spins in the System
+Iso(0) (2) : 1H - Spin Isotope Type
+Iso(1) (2) : 1H - Spin Isotope Type
+Iso(2) (2) : 1H - Spin Isotope Type
+Iso(3) (2) : 1H - Spin Isotope Type
+v(0) (1) : 80.0 - Chemical Shifts in Hz
+v(1) (1) : -20.0 - Chemical Shifts in Hz
+v(2) (1) : -80.0 - Chemical Shifts in Hz
+v(3) (1) :  -15.00 - Chemical Shifts in Hz
+J(0,1) (1) : 5.0 - Coupling Constants in Hz
+J(1,2) (1) : 7.2 - Coupling Constants in Hz
+J(0,2) (1) : 2.0 - Coupling Constants in Hz
+J(0,3) (1) : 3.7 - Coupling Constants in Hz
+J(1,3) (1) : 2.8 - Coupling Constants in Hz
+J(2,3) (1) : 4.7 - Coupling Constants in Hz
+Omega (1) : 400 - Spectrometer Frequency in MHz (1H based)

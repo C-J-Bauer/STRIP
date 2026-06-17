@@ -1,0 +1,77 @@
+\documentclass[tikz,border=0mm]{standalone}
+
+\usetikzlibrary{positioning, calc, shapes, arrows, arrows.meta}
+
+
+\definecolor{specblue}{rgb}{0.34, 0.66, 0.96}
+\definecolor{dispred}{rgb}{0.96, 0.34, 0.34}
+\definecolor{transformgreen}{rgb}{0.55, 0.77, 0.38}
+\definecolor{addgrey}{rgb}{0.60, 0.60, 0.60}
+\definecolor{suborange}{rgb}{0.96, 0.60, 0.06}
+\definecolor{abspurple}{rgb}{0.76, 0.60, 0.96}
+
+\tikzset{
+	shifted by/.style={
+		to path={($(\tikztostart)!#1!90:(\tikztotarget)$) -- ($(\tikztotarget)!#1!-90:(\tikztostart)$)}
+	},
+	shifted by/.default=5pt,
+	standard edge/.style={
+		thin,
+		-latex
+	},
+	legend/.style={
+		draw, 
+		thick, 
+		align=center, 
+		label={[font=\footnotesize, yshift=-2pt]below:#1}
+	}
+	back and forth between/.style args={#1 and #2}{
+		insert path={
+			(#1) edge[standard edge, shifted by] (#2) 
+			(#2) edge[standard edge, shifted by] (#1)
+		}
+	}
+}
+
+
+
+
+\begin{document}
+	\begin{tikzpicture}[font=\sffamily, legend/.style={font=\small,draw, align=center,label=below:#1},
+		specnode/.style={rectangle, inner sep=0pt, draw=none},
+		dispnode/.style={rectangle, fill=dispred, inner sep=0pt, draw=none},
+		inputnode/.style={rectangle, fill=addgrey, inner sep=0pt, draw=none},
+		]
+		
+		\node[specnode] (A) {\includegraphics[width= 60px]{Figure_4a}};
+		
+		\node[below=-1mm of A] (abs) {Phase-twist};
+		
+		\node[above right=0.5cm and .3cm of A, specnode] (B) {\includegraphics[width= 60px]{Figure_4b}};
+		
+		\node[right=0.cm of B] (bplus) {\Huge $+$};
+		
+		\node[right=.9cm of B, specnode] (C) {\includegraphics[width= 60px]{Figure_4c}};
+		
+		\node[below left=-1mm and -0.8cm of C] (ideal) {Ideal separation};
+		
+		\node[right=2cm of A, specnode] (D) {\includegraphics[width= 60px]{Figure_4d}};	
+		
+		\node[below=-1mm of D] (abs) {Absolute value};
+		
+		\node[below right=0.5cm and .3cm of A, specnode] (E) {\includegraphics[width= 60px]{Figure_4e}};
+		
+		\node[right=0.cm of E] (bplus) {\Huge $+$};
+		
+		\node[right=.9cm of E, specnode] (F) {\includegraphics[width= 60px]{Figure_4f}};
+		
+		\node[below left=-1mm and -0.2cm of F] (ideal) {STRIP};
+		
+		\draw[-latex, line width=0.25mm, color=addgrey] (A) to (B);
+		
+		\draw[-latex, line width=0.25mm, color=addgrey] (A) to (D);
+		
+		\draw[-latex, line width=0.25mm, color=addgrey] (A) to (E);
+		
+	\end{tikzpicture}
+\end{document}

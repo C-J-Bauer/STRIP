@@ -1,0 +1,86 @@
+\documentclass[tikz,border=0mm]{standalone}
+
+\usetikzlibrary{positioning, calc, shapes, arrows, arrows.meta}
+
+
+\definecolor{specblue}{rgb}{0.34, 0.66, 0.96}
+\definecolor{dispred}{rgb}{0.96, 0.34, 0.34}
+\definecolor{transformgreen}{rgb}{0.55, 0.77, 0.38}
+\definecolor{addgrey}{rgb}{0.60, 0.60, 0.60}
+\definecolor{suborange}{rgb}{0.96, 0.60, 0.06}
+\definecolor{abspurple}{rgb}{0.76, 0.60, 0.96}
+
+\tikzset{
+	shifted by/.style={
+		to path={($(\tikztostart)!#1!90:(\tikztotarget)$) -- ($(\tikztotarget)!#1!-90:(\tikztostart)$)}
+	},
+	shifted by/.default=5pt,
+	standard edge/.style={
+		thin,
+		-latex
+	},
+	legend/.style={
+		draw, 
+		thick, 
+		align=center, 
+		label={[font=\footnotesize, yshift=-2pt]below:#1}
+	}
+	back and forth between/.style args={#1 and #2}{
+		insert path={
+			(#1) edge[standard edge, shifted by] (#2) 
+			(#2) edge[standard edge, shifted by] (#1)
+		}
+	}
+} 
+
+
+
+\begin{document}
+	\begin{tikzpicture}[font={\fontfamily{phv}\selectfont\footnotesize}, legend/.style={draw,thick,align=center,label=below:#1},
+	ulegend/.style={draw,thick,align=center,label=above:#1},
+	specnode/.style={rectangle, fill=specblue, draw=none},
+	dispnode/.style={rectangle, fill=dispred, draw=none},
+	inputnode/.style={rectangle, fill=addgrey, draw=none},
+	E/.style = {% E as ellipse
+		ellipse, draw=#1!70!black, fill=#1!30,
+		inner xsep=0pt}
+	]
+	
+		
+		\node[ulegend=Initial spectrum guess,specnode] (B) {\includegraphics[width= 60px]{Cartoon_b}};
+		
+		\node[ulegend=Initial dispersive guess,right=3cm of B, dispnode] (C) {\includegraphics[width= 60px]{Cartoon_c}};
+		
+		\node[above=1.6cm of C, E=orange, align=center] (inp) {Input of \\ complex spectrum \\ from 2D FFT};
+
+        \node[ulegend=New spectrum guess, right=3cm of C, specnode] (D) {\includegraphics[width= 60px]{Cartoon_d}};
+        
+        \node[ulegend=Real input spectrum, above=1.5cm of D, inputnode] (A) {\includegraphics[width= 60px]{Cartoon_a}};
+        
+        \node[legend=New dispersive guess, below=2cm of D, dispnode] (E) {\includegraphics[width= 60px]{Cartoon_e}};
+        
+        \node[legend=Average dispersive guess, below=2cm of C, dispnode] (F) {\includegraphics[width= 60px]{Cartoon_f}};
+        
+        \node[legend=Spectrum guess ,below=2cm of B, specnode] (G) {\includegraphics[width= 60px]{Cartoon_g}};
+
+		
+		\draw[-latex, line width=1.25mm, color=transformgreen] (B) -- (C) node[midway, above, color=black] {$\mathcal{B}$ transform};
+		
+		\draw[-latex, line width=1.25mm, color=suborange] (C) -- (D) node[midway, above, color=black] {Subtract from} node[midway, below, color=black] {Real input spectrum};
+		
+		\draw[-latex, line width=1.25mm, color=transformgreen] (D) -- (E) node[align=center,midway, right, color=black] {$\mathcal{B}$ \\ transform};
+		
+		\draw[-latex, line width=1.25mm, color=addgrey] (E) -- (F) node[midway, above, color=black] {50\%} node[midway, below, color=black] {contribution};;
+		
+		\draw[-latex, line width=1.25mm, color=suborange] (F) -- (G) node[midway, above, color=black] {Subtract from} node[midway, below, color=black] {Real input spectrum};
+		
+		\draw[dashed, -latex, line width=1.25mm, color=abspurple] (G) -- (B) node[align=center,midway, left, color=black] {Absolute \\ value \\ calculation} node[midway, right, color=black] {( Next iteration)};
+		
+		\draw[-latex, line width=1.25mm, color=addgrey] (C) -- (F) node[align=center,midway, right, color=black] {50\% \\ contribution};
+
+        \draw[-latex, line width=1.25mm, color=black] (inp) -- (A) node[midway, above, color=black] {Take real part} node[midway, below, color=black] {of complex data};
+        
+        \draw[-latex, line width=1.25mm, color=abspurple] (inp) -- (B) node[align=center, midway, above, yshift=1.0mm, xshift = -4mm, color=black] {Absolute \\ value \\ calculation};
+		
+	\end{tikzpicture}
+\end{document}

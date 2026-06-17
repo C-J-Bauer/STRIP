@@ -1,0 +1,11 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "STRIP"
+version = "0.1.0"
+
+[tool.setuptools]
+py-modules = ["strip_tools", "strip_cupy", "strip"]
+package-dir = {"" = "src"}
