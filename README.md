@@ -1,6 +1,12 @@
 # STRIP
 
 An algorithm to improve the quality of phase modulated NMR data by reducing the double dispersive component.
+If you'd like to use the algorithm in your own research please cite the paper:
+
+> Christopher John Bauer,
+> "STRIP: A processing method to improve peakshapes in spectra acquired from multidimensional phase-modulated NMR experiments",
+> Journal of Magnetic Resonance 390 (2026) 108112.
+> https://doi.org/10.1016/j.jmr.2026.108112
 
 The organization of directories is as follows:
 
